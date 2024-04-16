@@ -1,1 +1,8 @@
-akash
+import win32com.client as win32
+
+outlook = win32.Dispatch('Outlook.Application')
+mail = outlook.CreateItem(0)
+mail.To = 'recipient@example.com'
+mail.Subject = 'Subject Here'
+mail.Body = 'Body Here'
+mail.Send()
