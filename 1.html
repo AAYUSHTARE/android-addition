@@ -1,4 +1,5 @@
 import os
+import shutil
 
 def find_file(filename, search_path):
     for root, dirs, files in os.walk(search_path):
@@ -6,10 +7,15 @@ def find_file(filename, search_path):
             return os.path.join(root, filename)
     return None
 
+def move_file(source, destination):
+    shutil.move(source, destination)
+    print("File moved successfully.")
+
 downloads_folder = os.path.join(os.path.expanduser('~'), 'Downloads')
 file_path = find_file('mts2016', downloads_folder)
 
 if file_path:
-    print("File found at:", file_path)
+    new_folder = '/path/to/new_folder'  # Change this to the path of the new folder
+    move_file(file_path, new_folder)
 else:
     print("File not found.")
