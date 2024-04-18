@@ -1,5 +1,11 @@
-import win32com.client as win32
+ import os
 
-excel = win32.Dispatch("Excel.Application")
-workbook = excel.Workbooks.Open(r"path\to\your\file.xlsx")
-excel.Visible = True  # Optional: If you want Excel to be visible
+# Path to your Excel file
+excel_file_path = 'example.xlsx'
+
+# Check if the file exists
+if os.path.exists(excel_file_path):
+    # Open the file using the default application
+    os.system('start "" "' + excel_file_path + '"')
+else:
+    print("File does not exist.")
