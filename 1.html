@@ -1,14 +1,15 @@
-import os
-import subprocess
+import pyautogui
 
-# Define the path to the folder containing the file
-folder_path = "/path/to/your/folder"
+# Specify the coordinates of the area you want to click
+x = 100
+y = 100
 
-# Define the name of the file you want to click on
-file_name = "your_file.txt"
+# Click on the specified coordinates
+pyautogui.click(x, y)
 
-# Navigate to the folder
-os.chdir(folder_path)
 
-# Open the file using the default application associated with its file type
-subprocess.Popen(['xdg-open', file_name])
+
+import pyautogui
+
+# Display mouse position and RGB color values
+pyautogui.displayMousePosition()
