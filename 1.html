@@ -1,22 +1,13 @@
-import xml.etree.ElementTree as ET
+import subprocess
 
-def open_workflow(workflow_path):
-    try:
-        tree = ET.parse(workflow_path)
-        root = tree.getroot()
-        # Now you can work with the XML structure of the workflow
-        return root
-    except Exception as e:
-        print(f"Error opening workflow: {e}")
-        return None
+# Path to AlteryxEngineCmd.exe
+alteryx_engine_cmd_path = "C:\\Program Files\\Alteryx\\bin\\AlteryxEngineCmd.exe"
 
-# Provide the path to your Alteryx workflow
-workflow_path = "path_to_your_workflow.yxmd"
+# Path to your Alteryx workflow file (.yxmd)
+workflow_path = "C:\\path\\to\\your\\workflow.yxmd"
 
-workflow_xml = open_workflow(workflow_path)
+# Command to run the workflow
+command = f'"{alteryx_engine_cmd_path}" /r "{workflow_path}"'
 
-if workflow_xml is not None:
-    # Now you can work with the XML structure of the workflow
-    print("Workflow opened successfully.")
-else:
-    print("Failed to open workflow.")
+# Run the command
+subprocess.run(command, shell=True)
