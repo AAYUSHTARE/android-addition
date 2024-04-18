@@ -1,15 +1,22 @@
-import os
-import subprocess
+import xml.etree.ElementTree as ET
 
-def open_excel_file(file_path):
+def open_workflow(workflow_path):
     try:
-        if os.name == 'nt':  # Check if the OS is Windows
-            os.startfile(file_path)
-        else:  # For Unix-like systems (Linux, macOS)
-            subprocess.Popen(['xdg-open', file_path])
+        tree = ET.parse(workflow_path)
+        root = tree.getroot()
+        # Now you can work with the XML structure of the workflow
+        return root
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error opening workflow: {e}")
+        return None
 
-# Example usage:
-excel_file_path = "path/to/your/excel_file.xlsx"
-open_excel_file(excel_file_path)
+# Provide the path to your Alteryx workflow
+workflow_path = "path_to_your_workflow.yxmd"
+
+workflow_xml = open_workflow(workflow_path)
+
+if workflow_xml is not None:
+    # Now you can work with the XML structure of the workflow
+    print("Workflow opened successfully.")
+else:
+    print("Failed to open workflow.")
