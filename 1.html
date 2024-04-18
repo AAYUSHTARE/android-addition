@@ -1,16 +1,14 @@
+import os
 import subprocess
 
-# Path to AlteryxEngineCmd.exe
-alteryx_engine_cmd_path = "C:\\Program Files\\Alteryx\\bin\\AlteryxEngineCmd.exe"
+# Define the path to the folder containing the file
+folder_path = "/path/to/your/folder"
 
-# Path to your Alteryx workflow file (.yxmd)
-workflow_path = "C:\\path\\to\\your\\workflow.yxmd"
+# Define the name of the file you want to click on
+file_name = "your_file.txt"
 
-# Path to save the output file (.yxdb)
-output_file_path = "C:\\path\\to\\save\\output.yxdb"
+# Navigate to the folder
+os.chdir(folder_path)
 
-# Command to run the workflow
-command = f'"{alteryx_engine_cmd_path}" /r "{workflow_path}" /o "{output_file_path}"'
-
-# Run the command
-subprocess.run(command, shell=True)
+# Open the file using the default application associated with its file type
+subprocess.Popen(['xdg-open', file_name])
