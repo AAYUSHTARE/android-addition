@@ -6,8 +6,11 @@ alteryx_engine_cmd_path = "C:\\Program Files\\Alteryx\\bin\\AlteryxEngineCmd.exe
 # Path to your Alteryx workflow file (.yxmd)
 workflow_path = "C:\\path\\to\\your\\workflow.yxmd"
 
+# Path to save the output file (.yxdb)
+output_file_path = "C:\\path\\to\\save\\output.yxdb"
+
 # Command to run the workflow
-command = f'"{alteryx_engine_cmd_path}" /r "{workflow_path}"'
+command = f'"{alteryx_engine_cmd_path}" /r "{workflow_path}" /o "{output_file_path}"'
 
 # Run the command
 subprocess.run(command, shell=True)
