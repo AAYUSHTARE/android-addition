@@ -1,21 +1,5 @@
-import os
-import shutil
+import win32com.client as win32
 
-def find_file(filename, search_path):
-    for root, dirs, files in os.walk(search_path):
-        if filename in files:
-            return os.path.join(root, filename)
-    return None
-
-def move_file(source, destination):
-    shutil.move(source, destination)
-    print("File moved successfully.")
-
-downloads_folder = os.path.join(os.path.expanduser('~'), 'Downloads')
-file_path = find_file('mts2016', downloads_folder)
-
-if file_path:
-    new_folder = '/path/to/new_folder'  # Change this to the path of the new folder
-    move_file(file_path, new_folder)
-else:
-    print("File not found.")
+excel = win32.Dispatch("Excel.Application")
+workbook = excel.Workbooks.Open(r"path\to\your\file.xlsx")
+excel.Visible = True  # Optional: If you want Excel to be visible
