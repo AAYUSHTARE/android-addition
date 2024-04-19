@@ -1,46 +1,12 @@
-import pyautogui
-import cv2
-import numpy as np
-
-# Function to find symbol and click on it
-def find_and_click(start_x, start_y, symbol):
-    # Loop horizontally from the starting position
-    for x in range(start_x, pyautogui.size()[0]):
-        # Take a screenshot of the screen
-        screenshot = pyautogui.screenshot(region=(x, start_y, 1, 1))
-        # Convert the screenshot to numpy array
-        screenshot_np = np.array(screenshot)
-        # Convert the color to grayscale
-        gray = cv2.cvtColor(screenshot_np, cv2.COLOR_BGR2GRAY)
-        # Check if symbol is found
-        if symbol in gray:
-            # Click on the symbol
-            pyautogui.click(x, start_y)
-            break
-
-# Example usage
-start_x = 100  # Starting position x-coordinate
-start_y = 200  # Starting position y-coordinate
-symbol = 255  # Symbol pixel value (gray value)
-find_and_click(start_x, start_y, symbol)
 
 
+# Create a Pandas Excel writer using XlsxWriter as the engine
+with pd.ExcelWriter('output.xlsx', engine='xlsxwriter') as writer:
+    # Write each dataframe to a different worksheet
+    df1.to_excel(writer, sheet_name='Sheet1', index=False)
+    df2.to_excel(writer, sheet_name='Sheet2', index=False)
+
+# Save the Excel file
+writer.save()
 
 
-
-
-
-
-import cv2
-
-# Load the image
-image = cv2.imread('symbol_image.png')
-
-# Convert the image to grayscale
-gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-# Print the gray value of a specific pixel (e.g., at coordinates (x, y))
-x = 100  # X-coordinate of the pixel
-y = 50   # Y-coordinate of the pixel
-gray_value = gray_image[y, x]  # OpenCV uses (y, x) indexing
-print("Gray value at pixel (", x, ",", y, "): ", gray_value)
