@@ -23,3 +23,24 @@ start_x = 100  # Starting position x-coordinate
 start_y = 200  # Starting position y-coordinate
 symbol = 255  # Symbol pixel value (gray value)
 find_and_click(start_x, start_y, symbol)
+
+
+
+
+
+
+
+
+import cv2
+
+# Load the image
+image = cv2.imread('symbol_image.png')
+
+# Convert the image to grayscale
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Print the gray value of a specific pixel (e.g., at coordinates (x, y))
+x = 100  # X-coordinate of the pixel
+y = 50   # Y-coordinate of the pixel
+gray_value = gray_image[y, x]  # OpenCV uses (y, x) indexing
+print("Gray value at pixel (", x, ",", y, "): ", gray_value)
