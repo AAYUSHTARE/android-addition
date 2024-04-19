@@ -1,15 +1,25 @@
 import pyautogui
+import cv2
+import numpy as np
 
-# Specify the coordinates of the area you want to click
-x = 100
-y = 100
+# Function to find symbol and click on it
+def find_and_click(start_x, start_y, symbol):
+    # Loop horizontally from the starting position
+    for x in range(start_x, pyautogui.size()[0]):
+        # Take a screenshot of the screen
+        screenshot = pyautogui.screenshot(region=(x, start_y, 1, 1))
+        # Convert the screenshot to numpy array
+        screenshot_np = np.array(screenshot)
+        # Convert the color to grayscale
+        gray = cv2.cvtColor(screenshot_np, cv2.COLOR_BGR2GRAY)
+        # Check if symbol is found
+        if symbol in gray:
+            # Click on the symbol
+            pyautogui.click(x, start_y)
+            break
 
-# Click on the specified coordinates
-pyautogui.click(x, y)
-
-
-
-import pyautogui
-
-# Display mouse position and RGB color values
-pyautogui.displayMousePosition()
+# Example usage
+start_x = 100  # Starting position x-coordinate
+start_y = 200  # Starting position y-coordinate
+symbol = 255  # Symbol pixel value (gray value)
+find_and_click(start_x, start_y, symbol)
