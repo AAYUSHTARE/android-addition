@@ -1,38 +1,18 @@
+import os
+import glob
 
-import pandas as pd
-import win32com.client as win32
+folder_path = '/path/to/your/folder'
+extension = '*.yxmd'
 
-# Sample DataFrame
-data = {'Name': ['John', 'Alice', 'Bob'],
-        'Age': [30, 25, 35]}
-df = pd.DataFrame(data)
+# Get a list of all files with the specified extension
+files = glob.glob(os.path.join(folder_path, extension))
 
-# Convert DataFrame to HTML with CSS styling for the table headers and font styling
-html_table = df.style.set_table_styles([
-    {'selector': 'th', 'props': [('color', 'red')]},  # Style for table headers
-    {'selector': 'body', 'props': [('font-family', 'Arial')]}  # Style for text font
-]).render()
+# Sort the files by modification time (newest first)
+files.sort(key=os.path.getmtime, reverse=True)
 
-# Text for the email body
-email_text = """<span style="font-family: Arial;">Hello,<br><br>Please find the DataFrame below:<br><br></span>"""
-
-# Combine text and HTML table
-email_body = email_text + html_table
-
-# Create the Outlook application object
-outlook = win32.Dispatch('outlook.application')
-
-# Create a new mail item
-mail = outlook.CreateItem(0)
-mail.Subject = 'DataFrame in Email Body'
-
-# Set the HTML body of the email
-mail.HTMLBody = f'<p>{email_body}</p>'
-
-# Add recipients, attachments, etc. as needed
-# mail.To = 'recipient@example.com'
-# mail.Attachments.Add('path_to_excel_file.xlsx')
-
-# Send the email
-mail​⬤
-
+# Open the newest file
+if files:
+    newest_file = files[0]
+    os.system('open "{}"'.format(newest_file))
+else:
+    print("No files with the specified extension found.")
