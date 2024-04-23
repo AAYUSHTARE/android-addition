@@ -1,18 +1,20 @@
 import os
-import glob
 
 folder_path = '/path/to/your/folder'
-extension = '*.yxmd'
+extension = '.yxmd'
 
-# Get a list of all files with the specified extension
-files = glob.glob(os.path.join(folder_path, extension))
+# Get a list of all files in the folder
+files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
 
-# Sort the files by modification time (newest first)
-files.sort(key=os.path.getmtime, reverse=True)
+# Filter files by extension
+yxmd_files = [f for f in files if f.endswith(extension)]
+
+# Sort files by modification time (newest first)
+yxmd_files.sort(key=lambda x: os.path.getmtime(os.path.join(folder_path, x)), reverse=True)
 
 # Open the newest file
-if files:
-    newest_file = files[0]
+if yxmd_files:
+    newest_file = os.path.join(folder_path, yxmd_files[0])
     os.system('open "{}"'.format(newest_file))
 else:
     print("No files with the specified extension found.")
