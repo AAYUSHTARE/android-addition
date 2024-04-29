@@ -18,3 +18,24 @@ if yxmd_files:
     os.system('open "{}"'.format(newest_file))
 else:
     print("No files with the specified extension found.")
+    
+    
+    
+    import os
+import glob
+
+def find_newest_file(folder, keyword):
+    search_pattern = os.path.join(folder, f"*{keyword}*")
+    files = glob.glob(search_pattern)
+    if files:
+        newest_file = max(files, key=os.path.getctime)
+        return newest_file
+    else:
+        return None
+
+folder_path = "/path/to/your/folder"
+keywords = ["Aayush", "Aditya", "akash"]
+
+for keyword in keywords:
+    newest_file = find_newest_file(folder_path, keyword)
+    print(f"Newest file with '{keyword}':", newest_file)
