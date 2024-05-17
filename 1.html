@@ -19,3 +19,22 @@ elseif isnull([country3]) then
 else 
   if [country1] = [country2] and [country2] = [country3] then 1 else 0 endif
 endif
+
+
+if isnull([country1]) and isnull([country2]) and isnull([country3]) then 
+  1
+elseif isnull([country1]) and isnull([country2]) then 
+  1
+elseif isnull([country1]) and isnull([country3]) then 
+  1
+elseif isnull([country2]) and isnull([country3]) then 
+  1
+elseif isnull([country1]) then 
+  if [country2] = [country3] or isnull([country2]) or isnull([country3]) then 1 else 0 endif
+elseif isnull([country2]) then 
+  if [country1] = [country3] or isnull([country1]) or isnull([country3]) then 1 else 0 endif
+elseif isnull([country3]) then 
+  if [country1] = [country2] or isnull([country1]) or isnull([country2]) then 1 else 0 endif
+else 
+  if [country1] = [country2] and [country2] = [country3] then 1 else 0 endif
+endif
